@@ -1,3 +1,8 @@
+## 🚧 Work in Progress
+
+This project is currently under active development. Some features may be incomplete or change as development continues.
+
+
 # 🤖 LexarAI
 
 ### `AI-powered Career Assistant`
@@ -111,10 +116,13 @@ LexarAI/
 
 ### 1️⃣ Clone
 
+### 🚀 Getting Started
+
 ```bash
-git clone <YOUR_REPOSITORY_URL>
-cd LexarAI
+git clone 
+cd Gen_Ai
 ```
+**[🔗 Git Clone](https://github.com/lexarcoder/Gen_Ai.git)**
 
 ### 2️⃣ Install
 
