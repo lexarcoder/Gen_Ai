@@ -25,6 +25,8 @@ export const createToken = (userId) => {
 export const setTokenCookie = (res, token) => {
     res.cookie("token", token, {
         httpOnly: true,
+        secure:true,
+        samesite: "strict",
         maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 };

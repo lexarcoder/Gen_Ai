@@ -114,6 +114,12 @@ async function loginUserController(req, res) {
                 message: "Invalid login ID or password",
             });
         }
+        if (user.authProvider === "google" || !user.password) {
+            return res.status(400).json({
+                success: false,
+                message: "This account uses Google Login. Please login with Google.",
+            });
+        }
 
         const isPasswordCorrect = await comparePassword(
             password,
@@ -440,20 +446,214 @@ async function resendVerificationEmailController(req, res) {
     }
 }
 
-// ******* User Password Forget *******
-async function forgetPasswordController(req, res) {
+
+// ******** User Password Forget ********
+
+async function  forgotPasswordController(req, res){
 try {
-    
+    const { email } = req.body;
+
+    if(!email){
+        return res.status(400).json({
+            success: false,
+            message: "Email is required",
+        });
+    }
+    const user = await userModel.findOne({ email });
+    if(!user){
+        return res.status(404).json({
+            success: false,
+            message: "User not found",
+        });
+    }
+     const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    user.resetPasswordOTP = otp;
+    user.resetPasswordOTPExpires = Date.now() + 5 * 60 * 1000;
+    await user.save();
+
+    await sendMail({
+        to: email,
+        subject: "Password Reset OTP - LexarAI ChatBot 🔐",
+        html: `
+        <div style="max-width:600px;margin:40px auto;padding:40px;background:#ffffff;border:1px solid #e5e7eb;border-radius:12px;font-family:Arial,Helvetica,sans-serif;color:#374151;line-height:1.7;">
+
+            <h1 style="margin:0;font-size:28px;color:#111827;">
+                Password Reset <span style="color:#2563eb;">LexarCoder</span> 🔐
+            </h1>
+
+            <p style="margin:24px 0 0;">
+                Hi <strong>${user.username}</strong>,
+            </p>
+
+            <p style="margin:16px 0;">
+                We received a request to reset the password for your LexarCoder account.
+                Use the OTP below to verify your identity and continue with the password reset.
+            </p>
+
+            <div style="text-align:center;margin:32px 0;">
+                <div style="display:inline-block;padding:16px 28px;background:#f3f4f6;border:1px solid #e5e7eb;border-radius:8px;">
+                    <span style="font-size:32px;font-weight:700;letter-spacing:8px;color:#2563eb;">
+                        ${otp}
+                    </span>
+                </div>
+            </div>
+
+            <p style="margin:0;color:#6b7280;font-size:14px;">
+                This OTP will remain valid for <strong>5 minutes</strong>.
+            </p>
+
+            <p style="margin-top:16px;color:#6b7280;font-size:14px;">
+                If you didn't request a password reset, you can safely ignore this email.
+            </p>
+
+            <hr style="margin:32px 0;border:none;border-top:1px solid #e5e7eb;">
+
+            <p style="margin:0;color:#6b7280;font-size:14px;">
+                Regards,<br>
+                <strong style="color:#111827;">LexarCoder Team</strong>
+            </p>
+
+        </div>
+    `,
+
+        text: `
+        Password Reset OTP - LexarCoder
+
+        Hi ${user.username},
+
+        We received a request to reset the password for your LexarCoder account.
+
+        Your password reset OTP is: ${otp}
+
+        This OTP will remain valid for 5 minutes.
+
+        If you didn't request a password reset, you can safely ignore this email.
+
+        Regards,
+        LexarCoder Team
+    `
+    });
+
+    return res.status(200).json({
+        success: true,
+        message: "OTP sent successfully to your email",
+    });
+
+
+ 
 } catch (error) {
-    
+    console.error("Error sending OTP:", error);
+    res.state(500).json({
+        success: false,
+        message: "Internal server error",
+    }); 
+}
+};
+
+// ******** Verify Password Reset OTP ********
+
+async function verifyResetOTPController(req, res) {
+    try {
+        const { email, otp } = req.body;
+
+        if (!email || !otp) {
+            return res.status(400).json({
+                success: false,
+                message: "Email and OTP are required",
+            });
+        }
+
+        const user = await userModel.findOne({ email });
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found",
+            });
+        }
+
+
+        if(!user.resetPasswordOTP || !user.resetPasswordOTPExpires){
+
+            return res.status(400).json({
+                success: false,
+                message: "No OTP request found. Please request a new OTP.",
+            });
+        }
+
+        if(!user.resetPasswordOTPExpires || user.resetPasswordOTPExpires < Date.now()){
+            return res.status(400).json({
+                success: false,
+                message: "OTP has expired. Please request a new OTP.",
+            });
+        }
+
+
+        if(user.resetPasswordOTP !== otp){
+            return res.status(400).json({
+                success: false,
+                message: "Invalid OTP. Please try again.",
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "OTP verified successfully. You can now reset your password.",
+        });
+
+    } catch (error) {
+        console.error("Verify OTP Error:", error);
+
+        return res.status(500).json({
+            success: false,
+            message: "Internal server error",
+        });
+    }
+
 }
 
+// ******** User Reset OTP ********
 
+async function resetPasswordController(req, res) {
+    try {
+
+        const {email , newPassword} = req.body;
+        if(!email || !newPassword){ 
+            return res.status(400).json({
+                success: false,
+                message: "Email and new password are required",
+            });
+        }
+
+        const user = await userModel.findOne({ email });
+
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found",
+            });
+        }
+
+        const hashedPassword = await hashPassword(newPassword);
+        user.password = hashedPassword;
+        await user.save();
+        user.resetPasswordOTP = null;
+        user.resetPasswordOTPExpires = null;
+
+        return res.status(200).json({
+            success: true,
+            message: "Password reset successfully",
+        });
+
+        
+    } catch (error) {
+        console.error("Reset Password Error:", error);
+        return res.status(500).json({
+            success: false,
+            message: "Internal server error",
+        });
+    }
 }
-
-
-
-
 
 export default {
     registerUserController,
@@ -462,5 +662,8 @@ export default {
     getMeUserController,
     getUserProfileController,
     verifyEmailController,
-    resendVerificationEmailController
+    resendVerificationEmailController,
+    forgotPasswordController,
+    verifyResetOTPController,
+    resetPasswordController
 };
