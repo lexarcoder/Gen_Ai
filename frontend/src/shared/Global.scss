@@ -1,0 +1,74 @@
+/* ================= IMPORTS ================= */
+
+// @use "./Fonts.scss";
+@use "./Fonts.scss" as *;
+@use "./Button.scss" as *;
+@use "./Link.scss" as *;
+@use "./ScrollPage.scss" as *;
+/* ================= RESET ================= */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* ================= ROOT ================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+html,
+body {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  color: #e5e7eb;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      #111a3a 0%,
+      #0d1228 22%,
+      #0b0b0e 55%,
+      #0a0a0b 100%
+    );
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ================= SCROLLBAR ================= */
+
+body {
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* ================= MEDIA ================= */
+
+img,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+img{
+  overflow: hidden;
+  object-fit: cover;
+}
+/* ================= INPUTS ================= */
+
+button,
+input,
+textarea {
+  border: none;
+  outline: none;
+  background: none;
+}

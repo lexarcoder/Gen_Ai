@@ -1,0 +1,118 @@
+/* ================= FONT FACES ================= */
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("../assets/fonts/headings/SpaceGrotesk-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("../assets/fonts/sub_headings/Sora-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Outfit";
+  src: url("../assets/fonts/paragraphs/Outfit-Medium.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/buttonLinks/Inter_28pt-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ================= FONT VARIABLES ================= */
+
+$font-heading: "Space Grotesk", sans-serif;
+$font-subheading: "Sora", sans-serif;
+$font-paragraph: "Outfit", sans-serif;
+$font-ui: "Inter", sans-serif;
+
+/* ================= TYPOGRAPHY RULES ================= */
+
+h1,
+h2,
+.heading {
+  font-family: $font-heading;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+h3,
+h4,
+h5,
+h6,
+.sub-heading {
+  font-family: $font-subheading;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #d4d4d8;
+}
+
+p,
+span,
+li,
+label {
+  font-family: $font-paragraph;
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+p {
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  color: #a1a1aa;
+}
+
+label {
+  color: #cbd5e1;
+}
+
+/* Fluid Heading Sizes */
+
+h1 {
+  font-size: clamp(2.5rem, 7vw, 6rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 5vw, 4rem);
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+}
+
+h4 {
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
+}
+
+/* ================= MEDIA RESPONSIVENESS ================= */
+
+@media (max-width: 768px) {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.2;
+  }
+
+  p {
+    line-height: 1.9;
+  }
+}

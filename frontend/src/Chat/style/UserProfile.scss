@@ -1,0 +1,552 @@
+// ==========================================================
+// DESIGN TOKENS
+// ==========================================================
+
+$bg-main: #0c0817;
+$card-bg: rgba(20, 16, 35, 0.456);
+$card-border: rgba(255, 255, 255, 0.238);
+$input-bg: rgba(255, 255, 255, 0.032);
+$input-border: rgba(255, 255, 255, 0.07);
+$input-focus: rgba(255, 255, 255, 0.15);
+$text-primary: #ffffff;
+$text-secondary: rgba(255, 255, 255, 0.766);
+$text-placeholder: rgba(255, 255, 255, 0.548);
+$verified-blue: #3b82f6;
+$unverified-gray: #6b7280;
+$danger-color: #ef4444;
+$danger-hover: #dc2626;
+$radius-card: 0.875rem;
+$radius-input: 0.625rem;
+$transition-speed: 200ms ease;
+
+// ==========================================================
+// BASE LAYOUT & OVERLAY FIX
+// ==========================================================
+
+.profile-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: clamp(5.625rem, 10vh, 8.75rem) clamp(0.75rem, 3vw, 1.5rem) 2.5rem;
+  box-sizing: border-box;
+  background-color: transparent;
+  color: $text-primary;
+  isolation: isolate;
+  overflow-x: hidden;
+}
+
+.profile-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  width: 100%;
+  max-width: 68.75rem;
+  min-width: 0;
+  // overflow-x: hidden;
+}
+
+.profile-top-nav {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0.4rem 1.5rem 1.2rem;
+  background: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.top-nav-home,
+.top-nav-contact {
+  width: 2.8rem;
+  height: 2.8rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 0.75rem;
+
+  transition: all 0.25s ease;
+}
+
+.top-nav-home {
+  justify-self: start;
+}
+
+.top-nav-contact {
+  justify-self: end;
+}
+
+.top-nav-home:hover,
+.top-nav-contact:hover {
+  color: #fff;
+  border-color: #892be28d;
+  transform: scale(0.9);
+}
+
+.top-nav-title {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.045em;
+  text-align: center;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
+  user-select: none;
+}
+
+.profile-card {
+  width: 100%;
+  padding: clamp(1rem, 3vw, 1.75rem);
+  box-sizing: border-box;
+  border: 0.0625rem solid $card-border;
+  border-radius: $radius-card;
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.2);
+}
+
+// ==========================================================
+// HEADER BANNER
+// ==========================================================
+
+.header-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  width: 100%;
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.875rem, 2.5vw, 1.25rem);
+    min-width: 0;
+
+    .avatar-wrapper {
+      position: relative;
+      width: clamp(5.625rem, 12vw, 8.125rem);
+      height: clamp(5.625rem, 12vw, 8.125rem);
+      flex-shrink: 0;
+
+      .profile-avatar {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 0.125rem solid rgba(255, 255, 255, 0.1);
+      }
+
+      .avatar-edit-btn {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: clamp(1.5rem, 3vw, 1.75rem);
+        height: clamp(1.5rem, 3vw, 1.75rem);
+        border: none;
+        border-radius: 50%;
+        background: #5b21b6;
+        color: $text-primary;
+        cursor: pointer;
+        will-change: transform;
+        transition:
+          background-color $transition-speed,
+          transform $transition-speed;
+
+        &:hover {
+          background: #6d28d9;
+          transform: scale(1.08);
+        }
+      }
+    }
+
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      min-width: 0;
+
+      .username-row {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+        flex-wrap: wrap;
+
+        h1 {
+          margin: 0;
+          font-size: clamp(1rem, 2.2vw, 1.25rem);
+          font-weight: 600;
+          letter-spacing: 0.03125rem;
+          word-break: break-word;
+        }
+      }
+
+      .user-handle {
+        margin: 0;
+
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+
+        max-width: 100%;
+
+        color: $text-secondary;
+        font-size: clamp(0.75rem, 1.5vw, 0.8125rem);
+        font-weight: 500;
+        line-height: 1.3;
+
+        overflow-wrap: anywhere;
+        word-break: break-word;
+
+        .verified-badge {
+          width: clamp(0.9rem, 1.8vw, 1.05rem);
+          height: clamp(0.9rem, 1.8vw, 1.05rem);
+          flex-shrink: 0;
+
+          stroke-width: 2.2;
+          transition:
+            color 0.2s ease,
+            fill 0.2s ease;
+
+          &.verified-blue {
+            color: $verified-blue;
+            fill: rgba($verified-blue, 0.1);
+          }
+
+          &.unverified-gray {
+            color: $unverified-gray;
+            fill: rgba($unverified-gray, 0.06);
+          }
+        }
+      }
+
+      .role-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        width: fit-content;
+        margin-top: 0.375rem;
+        padding: 0.25rem 0.75rem;
+        border: 0.0625rem solid rgba(255, 255, 255, 0.1);
+        border-radius: 1.25rem;
+        background: rgba(255, 255, 255, 0.05);
+        color: $text-secondary;
+        font-size: 0.6875rem;
+      }
+    }
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+}
+
+// ==========================================================
+// FORM CONTENT & INPUTS
+// ==========================================================
+
+.forms-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.form-section {
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 0.0625rem solid rgba(255, 255, 255, 0.04);
+
+    h2 {
+      margin: 0;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      letter-spacing: 0.03125rem;
+      text-transform: uppercase;
+    }
+
+    svg {
+      color: $text-secondary;
+      flex-shrink: 0;
+    }
+  }
+}
+
+.grid-2-col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(0.875rem, 2vw, 1.25rem);
+}
+
+.input-group {
+  width: 100%;
+
+  input:disabled,
+  select:disabled,
+  textarea:disabled {
+    opacity: 0.7;
+    background: rgba(255, 255, 255, 0.03);
+    cursor: not-allowed;
+  }
+
+  .input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    &.align-start {
+      align-items: flex-start;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 0.875rem;
+      z-index: 2;
+      color: rgba(255, 255, 255, 0.35);
+      pointer-events: none;
+
+      &.textarea-icon {
+        top: 0.875rem;
+      }
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.875rem 0.875rem 0.875rem 2.75rem;
+      box-sizing: border-box;
+      border: 0.0625rem solid $input-border;
+      border-radius: $radius-input;
+      background: $input-bg;
+      color: $text-primary;
+      font-size: 0.875rem;
+      outline: none;
+      transition: border-color $transition-speed;
+
+      &::placeholder {
+        color: $text-placeholder;
+      }
+
+      &:focus {
+        border-color: $input-focus;
+      }
+    }
+
+    .fixed-textarea {
+      min-height: 3.375rem;
+      line-height: 1.4;
+      resize: vertical;
+    }
+
+    select {
+      padding-right: 2.5rem;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.3)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+      background-repeat: no-repeat;
+      background-position: right 0.875rem center;
+      background-size: 0.875rem;
+      appearance: none;
+
+      option {
+        background: #141126;
+        color: $text-primary;
+      }
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+      opacity: 0.3;
+      filter: invert(1);
+      cursor: pointer;
+    }
+
+    &.email-wrapper {
+      input {
+        padding-right: 5.3125rem;
+      }
+
+      .verify-btn {
+        position: absolute;
+        right: 0.5rem;
+        z-index: 3;
+        padding: 0.375rem 0.75rem;
+        border: 0.0625rem solid rgba(255, 255, 255, 0.12);
+        border-radius: 0.375rem;
+        background: rgba(255, 255, 255, 0.06);
+        color: $text-primary;
+        font-size: 0.6875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color $transition-speed;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.12);
+        }
+      }
+    }
+  }
+}
+
+// ==========================================================
+// BUTTON SYSTEM
+// ==========================================================
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 0.0625rem solid transparent;
+  border-radius: 0.375rem;
+  background-color: transparent;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  will-change: transform;
+  transition:
+    background-color $transition-speed,
+    border-color $transition-speed,
+    color $transition-speed,
+    transform $transition-speed;
+
+  > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &-outline {
+    border-color: $verified-blue;
+    background-color: transparent;
+    color: $verified-blue;
+
+    &:hover {
+      background-color: $verified-blue;
+      color: #ffffff;
+    }
+  }
+
+  &-danger {
+    border-color: transparent;
+    background-color: $danger-color;
+    color: #ffffff;
+
+    &:hover {
+      background-color: $danger-hover;
+    }
+  }
+}
+
+// ==========================================================
+// RESPONSIVE BREAKPOINTS
+// ==========================================================
+
+@media (min-width: 90.0625rem) {
+  .profile-container {
+    padding-top: clamp(7.5rem, 8vw, 11.25rem);
+  }
+}
+
+@media (max-width: 62rem) {
+  .grid-2-col {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 42.5rem) {
+  .header-banner {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    text-align: center;
+
+    .header-left {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.875rem;
+
+      .profile-info {
+        align-items: center;
+
+        .username-row {
+          justify-content: center;
+        }
+      }
+    }
+
+    .header-right {
+      width: 100%;
+      flex-direction: column;
+      gap: 0.625rem;
+
+      .btn {
+        width: 100%;
+        box-sizing: border-box;
+      }
+    }
+  }
+}
+
+@media (max-width: 25rem) {
+  .profile-container {
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
+  }
+
+  .input-group {
+    .input-wrapper {
+      input,
+      select,
+      textarea {
+        padding: 0.75rem 0.75rem 0.75rem 2.375rem;
+        font-size: 0.8125rem;
+      }
+
+      .input-icon {
+        left: 0.625rem;
+      }
+
+      &.email-wrapper {
+        flex-direction: column;
+        gap: 0.5rem;
+        pointer-events: none;
+        opacity: 0.6;
+        cursor: not-allowed;
+        input {
+          padding-right: 2.375rem;
+        }
+
+        .verify-btn {
+          position: static;
+          width: 100%;
+          padding: 0.5rem;
+          text-align: center;
+        }
+      }
+    }
+  }
+}

@@ -10,7 +10,8 @@ const getSecret = () => {
     return process.env.JWT_SECRET;
 };
 
-// Create JWT token
+// ==================== Create JWT Token ====================
+
 export const createToken = (userId) => {
     return jwt.sign(
         { userId },
@@ -21,17 +22,28 @@ export const createToken = (userId) => {
     );
 };
 
-// Save token in browser cookie
+// ==================== Save Token in Browser Cookie ====================
+
 export const setTokenCookie = (res, token) => {
     res.cookie("token", token, {
         httpOnly: true,
-        secure:true,
-        samesite: "strict",
+        secure: false,
+        sameSite: "lax",
         maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 };
+// ==================== Clear Token Cookie ====================
 
-// Get/verify token
+export const clearTokenCookie = (res) => {
+    res.clearCookie("token", {
+        httpOnly: true,
+        secure: false,
+        sameSite: "lax",
+    });
+};
+
+// ==================== Verify JWT Token ====================
+
 export const verifyToken = (token) => {
     if (!token) {
         throw new Error("Token is required");

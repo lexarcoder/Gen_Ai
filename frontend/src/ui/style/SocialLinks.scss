@@ -1,0 +1,175 @@
+.social-strip {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-height: 4.625rem;
+  padding-block: 0.875rem;
+  overflow: hidden;
+  z-index: 5;
+
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000000 10%,
+    #000000 90%,
+    transparent
+  );
+
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000000 10%,
+    #000000 90%,
+    transparent
+  );
+
+  &:hover {
+    .social-track {
+      animation-play-state: paused;
+    }
+  }
+
+  .social-track {
+    display: flex;
+    align-items: center;
+    gap: 1.125rem;
+    width: max-content;
+    flex-shrink: 0;
+    animation: marquee 22s linear infinite;
+    will-change: transform;
+  }
+
+  .social-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    min-height: 2rem;
+    padding: 0.625rem 1.125rem;
+    flex: 0 0 auto;
+    border-radius: 1rem;
+    color: #e5e7eb;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      transform 0.3s ease,
+      border-color 0.3s ease,
+      background-color 0.3s ease;
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.09);
+      transform: translateY(-0.25rem);
+    }
+  }
+
+  .social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1rem;
+  }
+
+  .social-name {
+    font-size: 0.92rem;
+    font-weight: 500;
+    letter-spacing: 0.0125rem;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-100% / 3));
+  }
+}
+
+@media (max-width: 64rem) {
+  .social-strip {
+    min-height: 4.25rem;
+
+    .social-track {
+      gap: 1rem;
+    }
+
+    .social-item {
+      padding: 0.625rem 1rem;
+    }
+  }
+}
+
+@media (max-width: 48rem) {
+  .social-strip {
+    min-height: 4rem;
+    margin-top: 2rem;
+    padding-block: 0.75rem;
+
+    .social-track {
+      gap: 0.875rem;
+      animation-duration: 18s;
+    }
+
+    .social-item {
+      min-height: 3rem;
+      padding: 0.5625rem 0.875rem;
+      border-radius: 0.875rem;
+    }
+
+    .social-icon {
+      font-size: 0.95rem;
+    }
+
+    .social-name {
+      font-size: 0.85rem;
+    }
+  }
+}
+
+@media (max-width: 30rem) {
+  .social-strip {
+    min-height: 3.625rem;
+    margin-top: 1.5rem;
+    padding-block: 0.625rem;
+
+    .social-track {
+      gap: 0.75rem;
+      animation-duration: 15s;
+    }
+
+    .social-item {
+      gap: 0.5rem;
+      min-height: 2.75rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.75rem;
+    }
+
+    .social-icon {
+      font-size: 0.88rem;
+    }
+
+    .social-name {
+      font-size: 0.78rem;
+    }
+  }
+}
+
+@media (max-width: 22.5rem) {
+  .social-strip {
+    .social-track {
+      gap: 0.625rem;
+    }
+
+    .social-item {
+      padding: 0.4375rem 0.625rem;
+    }
+
+    .social-name {
+      font-size: 0.72rem;
+    }
+  }
+}

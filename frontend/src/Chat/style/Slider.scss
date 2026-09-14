@@ -1,0 +1,355 @@
+.slider-wrapper {
+  width: 16.25rem;
+  height: 100vh;
+  display: flex;
+  background: transparent;
+  box-sizing: border-box;
+  transition: width 0.25s ease;
+  border: none;
+border-right: 1px solid rgba(128, 128, 128, 0.355);
+background: #000000dd;
+backdrop-filter: blur(.9rem);
+  // =========================
+  // Collapsed Sidebar
+  // =========================
+
+  &.sidebar-collapsed {
+    width: 4.25rem;
+
+    .action-pill {
+      justify-content: center;
+      padding: 0;
+    }
+
+    .account-btn {
+      justify-content: center;
+      padding: 0;
+    }
+
+    .account-info {
+      display: none;
+    }
+
+    .toggle-zone {
+      justify-content: center;
+    }
+  }
+
+  // =========================
+  // Open Sidebar
+  // =========================
+
+  &.sidebar-open {
+    width: 16.25rem;
+
+    .action-pill {
+      justify-content: flex-start;
+      padding: 0 1rem;
+    }
+
+    .account-btn {
+      justify-content: flex-start;
+      padding: 0 0.875rem;
+    }
+
+    .toggle-zone {
+      justify-content: flex-end;
+      padding-right: 0.875rem;
+    }
+  }
+
+  // =========================
+  // Sidebar
+  // =========================
+
+  .sidebar-nav {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+    box-sizing: border-box;
+
+    // =========================
+    // Common Navigation Button
+    // =========================
+
+    .nav-btn {
+      width: calc(100% - 1.5rem);
+      height: 2.875rem;
+      margin: 0 auto;
+
+      display: flex;
+      align-items: center;
+
+      border: 1px solid transparent;
+      border-radius: 0.75rem;
+
+      background: transparent;
+      color: #999;
+
+      cursor: pointer;
+
+      transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+
+      .icon-shrink {
+        flex-shrink: 0;
+      }
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.06);
+        color: #fff;
+      }
+    }
+
+    // =========================
+    // Toggle
+    // =========================
+
+    .toggle-zone {
+      width: 100%;
+      display: flex;
+      margin-bottom: 1.25rem;
+
+      .collapse-toggle-btn {
+        width: 2.375rem;
+        height: 2.375rem;
+        margin: 0;
+
+        justify-content: center;
+
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        background: rgba(255, 255, 255, 0.02);
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.1);
+          border-color: rgba(255, 255, 255, 0.2);
+        }
+      }
+    }
+
+    // =========================
+    // Top Actions
+    // =========================
+
+    .top-actions-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    // =========================
+    // Action Pills
+    // =========================
+
+    .action-pill {
+      .nav-text {
+        margin-left: 0.875rem;
+      }
+    }
+
+    // =========================
+    // New Chat
+    // =========================
+
+    .new-chat-btn {
+      background: rgba(138, 43, 226, 0.06);
+      border-color: #892be218;
+
+      &:hover {
+        background: rgba(137, 43, 226, 0.077);
+        border-color: rgba(137, 43, 226, 0.122);
+        color: #fff;
+      }
+
+      .primary-glow-icon {
+        color: #a14fff74;
+      }
+    }
+
+    // =========================
+    // Bottom Actions
+    // =========================
+
+    .bottom-actions-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+
+      margin-top: auto;
+      padding-top: 1rem;
+
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    // =========================
+    // Settings
+    // =========================
+
+    .settings-btn {
+      color: #999;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+
+    // =========================
+    // Navigation Text
+    // =========================
+
+    .nav-text {
+      font-size: 0.9rem;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    // =========================
+    // Account Button
+    // =========================
+
+    .account-btn {
+      gap: 0.75rem;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(255, 255, 255, 0.05);
+      }
+    }
+
+    // =========================
+    // Account Avatar
+    // =========================
+
+   .account-avatar {
+  width: clamp(1.7rem, 4vw, 1.9rem);
+  height: clamp(1.7rem, 4vw, 1.9rem);
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+  border: 1px solid rgba(161, 79, 255, 0.55);
+  border-radius: 50%;
+
+  background: rgba(161, 79, 255, 0.08);
+  color: #a14fff;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+
+  img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .account-btn:hover & {
+    background: rgba(161, 79, 255, 0.14);
+    border-color: rgba(161, 79, 255, 0.9);
+    color: #c084fc;
+  }
+}
+
+    // =========================
+    // Account Information
+    // =========================
+
+    .account-info {
+      min-width: 0;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      overflow: hidden;
+    }
+
+    .account-name {
+      overflow: hidden;
+
+      color: #e0e0e0;
+
+      font-size: 0.88rem;
+      font-weight: 500;
+
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .account-status {
+      margin-top: 0.125rem;
+
+      color: rgba(255, 255, 255, 0.4);
+
+      font-size: 0.72rem;
+      font-weight: 400;
+
+      white-space: nowrap;
+    }
+  }
+}
+
+// ========================================
+// Tablet
+// ========================================
+
+@media (max-width: 56rem) {
+  .slider-wrapper {
+    &.sidebar-open {
+      width: 15rem;
+    }
+  }
+}
+
+// ========================================
+// Mobile
+// ========================================
+
+@media (max-width: 43.125rem) {
+  .slider-wrapper {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    z-index: 1000;
+
+    height: 100dvh;
+
+    transition: transform 0.25s ease;
+
+    &.sidebar-open {
+      width: min(16.25rem, 82vw);
+      transform: translateX(0);
+    }
+
+    &.sidebar-collapsed {
+      width: min(16.25rem, 82vw);
+      transform: translateX(-100%);
+
+      .sidebar-nav {
+        width: 100%;
+      }
+    }
+  }
+}
+
+// ========================================
+// Small Mobile
+// ========================================
+
+@media (max-width: 30rem) {
+  .slider-wrapper.sidebar-open {
+    width: 85vw;
+  }
+}

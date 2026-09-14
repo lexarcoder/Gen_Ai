@@ -1,0 +1,32 @@
+.ai-robot {
+  position: fixed;
+  right: 20px;
+  bottom: 30px;
+  width: 100px;
+  height: 100px;
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  background: transparent;
+  border: none;
+  box-shadow: none;
+
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  svg,
+  canvas,
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}

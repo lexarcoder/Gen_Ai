@@ -1,0 +1,555 @@
+.header-nav {
+  position: relative;
+  z-index: 1000;
+  width: 100%;
+  min-height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem clamp(1rem, 3vw, 2rem);
+  background: #0000003e;
+  color: #fff;
+  border-bottom: 0.0425rem solid #222;
+}
+
+// ============================================================
+// Header Sections
+// ============================================================
+
+.header-left,
+.header-center,
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.header-left {
+  display: none;
+  flex: 0 0 auto;
+}
+
+.header-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  justify-content: center;
+}
+
+.header-right {
+  flex: 1;
+  justify-content: flex-end;
+  gap: 0.65rem;
+}
+
+// ============================================================
+// Brand
+// ============================================================
+
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 0.45rem;
+
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.brand-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+
+  flex-shrink: 0;
+
+  stroke-width: 2.2;
+
+color: rgba(161, 79, 255, 0.45);
+}
+
+.brand-name {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 700;
+
+  letter-spacing: -0.02em;
+}
+
+// ============================================================
+// Common Icon Button
+// ============================================================
+
+.header-icon-btn {
+  width: 2.35rem;
+  height: 2.35rem;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+
+  background: transparent;
+  color: #fff;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+
+  &:hover {
+    background: #151515;
+    border-color: #2a2a2a;
+  }
+
+  &.active {
+    background: #181818;
+    border-color: #333;
+  }
+}
+
+.icon-svg {
+  width: 1.25rem;
+  height: 1.25rem;
+
+  stroke-width: 2;
+}
+
+// ============================================================
+// Avatar
+// ============================================================
+.account-avatar-btn {
+  width: 2.35rem;
+  height: 2.35rem;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  overflow: hidden;
+
+  border: 0.5px solid #892be28d;
+  border-radius: 50%;
+
+  background: #fff;
+  color: #000;
+
+  text-decoration: none;
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    border-color: #892be2;
+    transform: scale(1.04);
+  }
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+  object-fit: cover;
+}
+
+.avatar-initial {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #000;
+  color: white;
+
+  border-radius: 50%;
+
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+// ============================================================
+// Dropdown Container
+// ============================================================
+
+.dropdown-container {
+  position: relative;
+}
+
+// ============================================================
+// Dropdown Menu
+// ============================================================
+
+.dropdown-menu {
+  position: absolute;
+
+  top: calc(100% + 0.55rem);
+  right: 0;
+
+  width: min(15rem, calc(100vw - 2rem));
+
+  padding: 0.4rem;
+
+  background: #0a0a0a;
+  color: #fff;
+
+  border: 1px solid #292929;
+  border-radius: 0.65rem;
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+
+  overflow: hidden;
+
+  animation: dropdownOpen 0.16s ease-out;
+}
+
+@keyframes dropdownOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-0.3rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ============================================================
+// Dropdown Item
+// ============================================================
+
+.dropdown-item {
+  width: 100%;
+  min-height: 2.5rem;
+
+  display: flex;
+  align-items: center;
+
+  gap: 0.7rem;
+
+  padding: 0.65rem 0.75rem;
+
+  border: 0;
+  border-radius: 0.45rem;
+
+  background: transparent;
+  color: #eee;
+
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+
+  text-align: left;
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+
+  &:hover {
+    background: #181818;
+    color: #fff;
+  }
+
+  &.danger {
+    color: #ff6b6b;
+
+    &:hover {
+      background: rgba(255, 80, 80, 0.08);
+      color: #ff8585;
+    }
+  }
+}
+
+.item-icon {
+  flex-shrink: 0;
+
+  width: 1.05rem;
+  height: 1.05rem;
+
+  stroke-width: 2;
+}
+
+.dropdown-item span {
+  min-width: 0;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// ============================================================
+// Divider
+// ============================================================
+
+.dropdown-divider {
+  height: 1px;
+
+  margin: 0.35rem 0.25rem;
+
+  background: #282828;
+}
+
+// ============================================================
+// Visibility
+// ============================================================
+
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: flex;
+}
+
+// ============================================================
+// Large Desktop
+// ============================================================
+
+@media (min-width: 1440px) {
+  .header-nav {
+    padding-inline: clamp(2rem, 5vw, 5rem);
+  }
+
+  .header-right {
+    gap: 0.75rem;
+  }
+}
+
+// ============================================================
+// Laptop
+// ============================================================
+
+@media (max-width: 1200px) {
+  .header-nav {
+    padding-inline: clamp(1rem, 2.5vw, 2rem);
+  }
+}
+
+// ============================================================
+// Tablet
+// ============================================================
+
+@media (max-width: 900px) {
+  .header-nav {
+    min-height: 3.8rem;
+  }
+
+  .header-right {
+    gap: 0.5rem;
+  }
+
+  .account-avatar-btn,
+  .header-icon-btn {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+}
+
+// ============================================================
+// 700px - Mobile Header Starts
+// ============================================================
+
+@media (max-width: 700px) {
+  .header-nav {
+    min-height: 3.75rem;
+
+    padding-inline: 0.85rem;
+  }
+
+  // Show left menu below 700px
+  .header-left {
+    display: flex;
+    flex: 0 0 auto;
+  }
+
+  .header-center {
+    position: static;
+
+    flex: 1;
+
+    transform: none;
+
+    justify-content: center;
+
+    min-width: 0;
+  }
+
+  .header-right {
+    flex: 0 0 auto;
+
+    gap: 0.4rem;
+  }
+
+  .desktop-only {
+    display: none;
+  }
+
+  .mobile-only {
+    display: flex;
+  }
+
+  .brand-name {
+    font-size: 1rem;
+  }
+
+  .brand-icon {
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+
+  .account-avatar-btn,
+  .header-icon-btn {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+}
+
+// ============================================================
+// Small Mobile
+// ============================================================
+
+@media (max-width: 480px) {
+  .header-nav {
+    min-height: 3.5rem;
+
+    padding-inline: 0.65rem;
+  }
+
+  .header-left {
+    flex-shrink: 0;
+  }
+
+  .header-center {
+    padding-inline: 0.4rem;
+  }
+
+  .brand-logo {
+    gap: 0.35rem;
+
+    max-width: 100%;
+  }
+
+  .brand-name {
+    font-size: 0.95rem;
+  }
+
+  .brand-icon {
+    width: 1.05rem;
+    height: 1.05rem;
+  }
+
+  .account-avatar-btn,
+  .header-icon-btn {
+    width: 2.1rem;
+    height: 2.1rem;
+  }
+
+  .icon-svg {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .dropdown-menu {
+    position: fixed;
+
+    top: 4rem;
+    right: 0.65rem;
+
+    width: min(15rem, calc(100vw - 1.3rem));
+  }
+}
+
+// ============================================================
+// Very Small Devices
+// ============================================================
+
+@media (max-width: 360px) {
+  .header-nav {
+    padding-inline: 0.5rem;
+  }
+
+  .header-center {
+    padding-inline: 0.25rem;
+  }
+
+  .brand-logo {
+    gap: 0.25rem;
+  }
+
+  .brand-name {
+    font-size: 0.9rem;
+  }
+
+  .brand-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .account-avatar-btn,
+  .header-icon-btn {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .header-right {
+    gap: 0.25rem;
+  }
+
+  .icon-svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+// ============================================================
+// Extra Small Devices
+// ============================================================
+
+@media (max-width: 320px) {
+  .header-nav {
+    padding-inline: 0.4rem;
+  }
+
+  .brand-name {
+    font-size: 0.85rem;
+  }
+
+  .account-avatar-btn,
+  .header-icon-btn {
+    width: 1.9rem;
+    height: 1.9rem;
+  }
+}
+
+// ============================================================
+// Reduced Motion
+// ============================================================
+
+@media (prefers-reduced-motion: reduce) {
+  .header-icon-btn,
+  .account-avatar-btn,
+  .brand-logo,
+  .dropdown-item,
+  .dropdown-menu {
+    transition: none;
+    animation: none;
+  }
+}

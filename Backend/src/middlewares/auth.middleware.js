@@ -1,9 +1,12 @@
-import userModel from "../models/auth/user.model.js";
-import userBlackList from "../models/auth/userblacklist.model.js"
-import jwt from "jsonwebtoken"
+import userModel from "../model/authModel/user.model.js";
+import userBlacklist from "../model/authModel/userBlacklist.model.js";
+import jwt from "jsonwebtoken";
 
-async function identifyUser(req, res, next) {
+// ==================== Identify User ====================
+
+const identifyUser = async (req, res, next) => {
     try {
+        // Get token from browser cookie
         const token = req.cookies?.token;
 
         if (!token) {
@@ -13,12 +16,14 @@ async function identifyUser(req, res, next) {
             });
         }
 
+        // Verify JWT token
         const decoded = jwt.verify(
             token,
             process.env.JWT_SECRET
         );
 
-        const isBlackList = await userBlackList.findOne({
+        // Check if token is blacklisted
+        const isBlackList = await userBlacklist.findOne({
             token,
         });
 
@@ -29,6 +34,7 @@ async function identifyUser(req, res, next) {
             });
         }
 
+        // Find user using userId from JWT payload
         const user = await userModel
             .findById(decoded.userId)
             .select("-password");
@@ -40,16 +46,20 @@ async function identifyUser(req, res, next) {
             });
         }
 
+        // Attach user to request
         req.user = user;
 
+        // Continue to controller
         next();
 
     } catch (error) {
+        console.error("Identify User Error:", error.message);
+
         return res.status(401).json({
             success: false,
             message: "Invalid token or expired session",
         });
     }
-}
+};
 
 export default identifyUser;

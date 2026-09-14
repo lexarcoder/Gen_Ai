@@ -1,0 +1,27 @@
+@use "./Fonts" as *;
+
+.Link {
+  text-decoration: none;
+  color: inherit;
+  transition: 0.3s ease;
+  font-weight: 500;
+}
+
+// --- Lists ---
+ul {
+  list-style: none;
+  font-family: $font-ui;
+  li {
+    display: flex;
+    align-items: center;
+    &::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background: #a855f7;
+      margin-right: 8px;
+      display: inline-block;
+      transform: rotate(45deg);
+    }
+  }
+}

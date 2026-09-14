@@ -1,0 +1,500 @@
+$bg-deep-space: #060212;
+$lexar-purple: #7c3aed;
+$lexar-indigo: #4f46e5;
+$emerald-glow: #10b981;
+$rose-glow: #f43f5e;
+$text-bright: #f8fafc;
+$text-slate: #94a3b8;
+
+.verify-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  padding: clamp(1rem, 3vw, 2.5rem);
+
+  overflow: hidden;
+  background: $bg-deep-space;
+  color: $text-bright;
+
+  transition: background 0.5s ease;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background-image:
+      linear-gradient(
+        rgba(124, 58, 237, 0.015) 0.0625rem,
+        transparent 0.0625rem
+      ),
+      linear-gradient(
+        90deg,
+        rgba(124, 58, 237, 0.015) 0.0625rem,
+        transparent 0.0625rem
+      );
+
+    background-size: 3.125rem 3.125rem;
+    background-position: center;
+
+    mask-image: radial-gradient(
+      circle at center,
+      #000 15%,
+      transparent 55%
+    );
+
+    -webkit-mask-image: radial-gradient(
+      circle at center,
+      #000 15%,
+      transparent 55%
+    );
+
+    pointer-events: none;
+    z-index: 1;
+
+    transition: 0.5s ease;
+  }
+
+  // Error state
+
+  &.status-error {
+    background:
+      radial-gradient(
+        circle at center,
+        rgba(244, 63, 94, 0.18),
+        transparent 55%
+      ),
+      #100309;
+
+    &::before {
+      background-image:
+        linear-gradient(
+          rgba(244, 63, 94, 0.035) 0.0625rem,
+          transparent 0.0625rem
+        ),
+        linear-gradient(
+          90deg,
+          rgba(244, 63, 94, 0.035) 0.0625rem,
+          transparent 0.0625rem
+        );
+    }
+  }
+
+  // Ambient orbs
+
+  .ambient-orb {
+    position: absolute;
+
+    width: clamp(18rem, 40vw, 37.5rem);
+    height: clamp(18rem, 40vw, 37.5rem);
+
+    border-radius: 50%;
+    filter: blur(clamp(5rem, 10vw, 9.375rem));
+
+    opacity: 0.22;
+    pointer-events: none;
+    z-index: 1;
+
+    transition: 0.5s ease;
+
+    &.orb-purple {
+      top: 15%;
+      left: 10%;
+
+      background: radial-gradient(
+        circle,
+        $lexar-purple 0%,
+        transparent 70%
+      );
+    }
+
+    &.orb-indigo {
+      right: 10%;
+      bottom: 10%;
+
+      background: radial-gradient(
+        circle,
+        $lexar-indigo 0%,
+        transparent 70%
+      );
+    }
+  }
+
+  &.status-error {
+    .ambient-orb {
+      opacity: 0.12;
+
+      &.orb-purple,
+      &.orb-indigo {
+        background: radial-gradient(
+          circle,
+          $rose-glow 0%,
+          transparent 70%
+        );
+      }
+    }
+  }
+
+  // Main card
+
+  .verify-card-premium {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: min(100%, 27.5rem);
+
+    padding: clamp(2rem, 5vw, 3.5rem)
+      clamp(1.25rem, 5vw, 3rem);
+
+    text-align: center;
+
+    background: rgba(13, 8, 30, 0.35);
+    border: 0.0625rem solid rgba(124, 58, 237, 0.12);
+    border-radius: clamp(1rem, 3vw, 1.5rem);
+
+    box-shadow:
+      0 1.875rem 4.375rem rgba(0, 0, 0, 0.7),
+      inset 0 0.0625rem 0.0625rem rgba(255, 255, 255, 0.03);
+
+    transition: 0.5s ease;
+
+    &.status-success {
+      border-color: rgba($emerald-glow, 0.25);
+
+      box-shadow:
+        0 1.875rem 4.375rem rgba(0, 0, 0, 0.7),
+        0 0 2.5rem rgba($emerald-glow, 0.05);
+    }
+
+    &.status-error {
+      background: rgba(35, 5, 14, 0.65);
+      border-color: rgba($rose-glow, 0.45);
+
+      box-shadow:
+        0 1.875rem 4.375rem rgba(0, 0, 0, 0.7),
+        0 0 3.125rem rgba($rose-glow, 0.12);
+    }
+
+    .brand-badge {
+      margin-bottom: clamp(1.25rem, 4vw, 2rem);
+      padding: 0.35rem 0.85rem;
+
+      background: rgba(124, 58, 237, 0.08);
+      border: 0.0625rem solid rgba(124, 58, 237, 0.2);
+      border-radius: 100rem;
+
+      .badge-tag {
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+
+        color: mix(#fff, $lexar-purple, 15%);
+      }
+    }
+
+    &.status-error {
+      .brand-badge {
+        background: rgba($rose-glow, 0.08);
+        border-color: rgba($rose-glow, 0.25);
+
+        .badge-tag {
+          color: $rose-glow;
+        }
+      }
+    }
+
+    .status-graphic-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 100%;
+      height: clamp(4rem, 10vw, 5rem);
+
+      margin-bottom: clamp(1rem, 3vw, 1.5rem);
+    }
+
+    .lexar-spinner {
+      position: relative;
+
+      width: clamp(2.75rem, 10vw, 3rem);
+      height: clamp(2.75rem, 10vw, 3rem);
+
+      .core-ring {
+        width: 100%;
+        height: 100%;
+
+        border: 0.125rem solid rgba(124, 58, 237, 0.08);
+        border-top-color: $lexar-purple;
+        border-right-color: mix(#fff, $lexar-indigo, 10%);
+        border-radius: 50%;
+
+        animation: spin
+          0.7s
+          cubic-bezier(0.4, 0.1, 0.3, 0.9)
+          infinite;
+      }
+    }
+
+    .lexar-success-checkmark,
+    .lexar-error-cross {
+      width: clamp(3rem, 12vw, 3.375rem);
+      height: clamp(3rem, 12vw, 3.375rem);
+
+      border-radius: 50%;
+
+      animation: pushUp
+        0.45s
+        cubic-bezier(0.34, 1.56, 0.64, 1)
+        forwards;
+    }
+
+    .lexar-success-checkmark {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: rgba(16, 185, 129, 0.03);
+      border: 0.09375rem solid $emerald-glow;
+
+      box-shadow:
+        0 0 1.875rem rgba($emerald-glow, 0.1);
+
+      .draw-check {
+        width: 0.625rem;
+        height: 1.125rem;
+
+        margin-top: -0.1875rem;
+
+        border-right: 0.15625rem solid $emerald-glow;
+        border-bottom: 0.15625rem solid $emerald-glow;
+
+        transform: rotate(45deg);
+      }
+    }
+
+    .lexar-error-cross {
+      position: relative;
+
+      background: rgba(244, 63, 94, 0.05);
+      border: 0.09375rem solid $rose-glow;
+
+      box-shadow:
+        0 0 2.1875rem rgba($rose-glow, 0.18);
+
+      .cross-line {
+        position: absolute;
+        top: 50%;
+        left: 25%;
+
+        width: 50%;
+        height: 0.125rem;
+
+        background: $rose-glow;
+
+        &.line-1 {
+          transform: translateY(-50%) rotate(45deg);
+        }
+
+        &.line-2 {
+          transform: translateY(-50%) rotate(-45deg);
+        }
+      }
+    }
+
+    .display-title {
+      margin: 0 0 0.5rem;
+
+      font-size: clamp(1.25rem, 4vw, 1.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+
+      color: $text-bright;
+    }
+
+    .display-desc {
+      width: 100%;
+      max-width: 20rem;
+
+      margin: 0 0 1.5rem;
+
+      color: $text-slate;
+      font-size: clamp(0.85rem, 2.5vw, 0.92rem);
+      line-height: 1.6;
+    }
+
+    .fast-redirect-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+
+      .pulse-dot {
+        flex-shrink: 0;
+
+        width: 0.375rem;
+        height: 0.375rem;
+
+        background: $emerald-glow;
+        border-radius: 50%;
+
+        animation: blink 1.2s infinite;
+      }
+
+      p {
+        margin: 0;
+
+        color: rgba(148, 163, 184, 0.6);
+        font-size: clamp(0.75rem, 2.5vw, 0.82rem);
+        letter-spacing: 0.01em;
+      }
+    }
+
+    .lexar-action-btn {
+      margin-top: 0.5rem;
+      padding: 0.65rem 1.75rem;
+
+      background: transparent;
+      border: 0.0625rem solid rgba(255, 255, 255, 0.1);
+      border-radius: 100rem;
+
+      color: $text-bright;
+      font-size: 0.85rem;
+      font-weight: 500;
+
+      cursor: pointer;
+      transition: 0.3s ease;
+
+      &:hover {
+        background: rgba($rose-glow, 0.08);
+        border-color: $rose-glow;
+        transform: translateY(-0.0625rem);
+      }
+    }
+  }
+}
+
+// Tablet
+
+@media (max-width: 48rem) {
+  .verify-container {
+    padding: 1.5rem;
+
+    .ambient-orb {
+      width: 25rem;
+      height: 25rem;
+      filter: blur(7rem);
+    }
+
+    .verify-card-premium {
+      width: min(100%, 27.5rem);
+    }
+  }
+}
+
+// Mobile
+
+@media (max-width: 30rem) {
+  .verify-container {
+    padding: 1rem;
+
+    .ambient-orb {
+      width: 18rem;
+      height: 18rem;
+      filter: blur(5rem);
+
+      &.orb-purple {
+        top: 5%;
+        left: -25%;
+      }
+
+      &.orb-indigo {
+        right: -25%;
+        bottom: 5%;
+      }
+    }
+
+    .verify-card-premium {
+      width: 100%;
+      padding: 2rem 1.25rem;
+      border-radius: 1rem;
+
+      .brand-badge {
+        margin-bottom: 1.5rem;
+      }
+
+      .display-desc {
+        max-width: 17rem;
+      }
+    }
+  }
+}
+
+// Small mobile
+
+@media (max-width: 22.5rem) {
+  .verify-container {
+    padding: 0.75rem;
+
+    .verify-card-premium {
+      padding: 1.75rem 1rem;
+
+      .display-title {
+        font-size: 1.2rem;
+      }
+
+      .display-desc {
+        font-size: 0.82rem;
+      }
+
+      .lexar-action-btn {
+        width: 100%;
+        padding-inline: 1rem;
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pushUp {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(0.3125rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.9);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
